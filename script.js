@@ -121,6 +121,7 @@ function showStep(step) {
     document.querySelectorAll('.step').forEach(function (stepElement) {
         stepElement.style.display = 'none';
     });
+
     document.getElementById(`step${step}`).style.display = 'flex';
 
     const backButton = document.querySelector('.back-button');
@@ -129,7 +130,7 @@ function showStep(step) {
     if (step === 1) {
         backButton.style.display = 'none';
         closeButton.style.display = 'block';
-    } else if (step === 5) {
+    } else if (step === 6) { // Теперь шагов стало 6
         backButton.style.display = 'none';
         closeButton.style.display = 'none';
     } else {
@@ -139,12 +140,12 @@ function showStep(step) {
 
     updateConfirmButton();
 
-    if (step === 4) {
+    if (step === 5) { // Теперь шаг 5 — это ввод данных
         validateStep4();
         setupStep4Listeners();
     }
 
-    if (step === 3) {
+    if (step === 4) { // Теперь шаг 4 — это выбор даты и времени
         updateDateDisplay();
         renderCalendar(selectedDate);
     }
@@ -514,7 +515,7 @@ function updateConfirmButton() {
             break;
         case 3:
             // Новый шаг "Дополнительные услуги"
-            confirmButton.disabled = false; // Пока оставляем кнопку активной
+            confirmButton.disabled = false; // Кнопка всегда активна на этом шаге
             break;
         case 4:
             const timeSlotSelected = document.querySelector('.time-slot.selected');
