@@ -121,6 +121,7 @@ function showStep(step) {
     document.querySelectorAll('.step').forEach(function (stepElement) {
         stepElement.style.display = 'none';
     });
+
     document.getElementById(`step${step}`).style.display = 'flex';
 
     const backButton = document.querySelector('.back-button');
@@ -145,8 +146,7 @@ function showStep(step) {
     }
 
     if (step === 3) {
-        updateDateDisplay();
-        renderCalendar(selectedDate);
+        // Логика для шага "Дополнительные услуги" (пока пусто)
     }
 }
 
@@ -157,7 +157,7 @@ function nextStep() {
     const currentStepNumber = parseInt(currentStep.id.replace('step', ''));
     const nextStepNumber = currentStepNumber + 1;
 
-    if (nextStepNumber === 5) {
+    if (nextStepNumber === 6) {
         saveAppointment();
     } else {
         showStep(nextStepNumber);
@@ -513,10 +513,14 @@ function updateConfirmButton() {
             confirmButton.disabled = !servicesSelected;
             break;
         case 3:
+            // Шаг "Дополнительные услуги" всегда активен
+            confirmButton.disabled = false;
+            break;
+        case 4:
             const timeSlotSelected = document.querySelector('.time-slot.selected');
             confirmButton.disabled = !(timeSlotSelected && selectedDate);
             break;
-        case 4:
+        case 5:
             validateStep4();
             break;
         default:
