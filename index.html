@@ -258,7 +258,7 @@
             <div id="step3" class="step" style="display: none;">
     <h2>Дополнительные услуги</h2>
     <!-- Пока оставляем пустым -->
-    <button id="next3" class="next" onclick="nextStep()">Подтвердить</button>
+    <button id="next3" class="next" onclick="nextStep(4)">Подтвердить</button>
 </div>
 
          <!-- Шаг 4: Выбор даты и времени -->
@@ -297,7 +297,7 @@
 
             <!-- Блок выбора времени -->
             <div class="time-slots"></div>
-            <button id="next4", class="next" disabled onclick="nextStep(4)">Подтвердить</button>
+            <button id="next4", class="next" disabled onclick="nextStep(5)">Подтвердить</button>
         </div>
 
             <!-- Шаг 5: Ввод данных -->
@@ -306,7 +306,7 @@
                 <input type="text" id="clientName" placeholder="ФИО" oninput="validateName(this)">
                 <input type="tel" id="clientPhone" placeholder="Номер телефона" oninput="formatPhone(this)">
                 <input type="text" id="clientCarNumber" placeholder="Номер авто">
-                <button id="next5" class="next" disabled onclick="nextStep(5)">Подтвердить</button>
+                <button id="next5" class="next" disabled onclick="nextStep(6)">Подтвердить</button>
             </div>
 
             <!-- Шаг 6: Успешная запись -->
