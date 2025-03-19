@@ -476,7 +476,7 @@ function validateStep4() {
     const nameInput = document.getElementById('clientName');
     const phoneInput = document.getElementById('clientPhone');
     const carNumberInput = document.getElementById('clientCarNumber');
-    const nextButton = document.getElementById('next4');
+    const nextButton = document.getElementById('next5');
 
     const name = nameInput.value.trim();
     const phone = phoneInput.value.trim();
@@ -522,7 +522,7 @@ function updateConfirmButton() {
             confirmButton.disabled = !(timeSlotSelected && selectedDate);
             break;
         case 5:
-            validateStep4();
+            validateStep4(); // Теперь это шаг 5
             break;
         default:
             confirmButton.disabled = false;
