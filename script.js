@@ -190,7 +190,6 @@ function resetModal() {
     updateDateDisplay(); // Обновляем отображение даты
     renderCalendar(selectedDate); // Перерисовываем календарь
 
-
     const timeSlotsContainer = document.querySelector('.time-slots');
     timeSlotsContainer.innerHTML = '';
 
@@ -200,8 +199,9 @@ function resetModal() {
 
     document.getElementById('next1').disabled = true;
     document.getElementById('next2').disabled = true;
-    document.getElementById('next3').disabled = true;
-    document.getElementById('next4').disabled = true;
+    document.getElementById('next3').disabled = true; // Новый шаг
+    document.getElementById('next4').disabled = true; // Теперь это шаг 4
+    document.getElementById('next5').disabled = true; // Теперь это шаг 5
 
     showStep(1);
 }
