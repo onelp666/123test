@@ -396,15 +396,13 @@ function populateTimeSlots(duration) {
 
         slotDiv.addEventListener('click', function () {
             const isSelected = this.classList.contains('selected');
-
             if (isSelected) {
                 this.classList.remove('selected');
             } else {
                 document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
                 this.classList.add('selected');
             }
-
-            updateConfirmButton();
+            updateConfirmButton(); // Обновляем кнопку "Подтвердить"
         });
 
         timeSlotsContainer.appendChild(slotDiv);
@@ -524,16 +522,17 @@ function updateConfirmButton() {
             confirmButton.disabled = false;
             break;
         case 4:
-            // Шаг 4: Ввод личной информации
+            // Шаг 4: Выбор даты и времени
+            const timeSlotSelected = document.querySelector('.time-slot.selected');
+            confirmButton.disabled = !(timeSlotSelected && selectedDate);
+            break;
+        case 5:
+            // Шаг 5: Ввод личной информации
             const nameInput = document.getElementById('clientName').value.trim();
             const phoneInput = document.getElementById('clientPhone').value.trim();
             const carNumberInput = document.getElementById('clientCarNumber').value.trim();
             const isPhoneValid = phoneInput.length === 18; // Проверка формата телефона
             confirmButton.disabled = !(nameInput && isPhoneValid && carNumberInput);
-            break;
-        case 5:
-            // Шаг 5: Успешная запись (кнопка "Закрыть")
-            confirmButton.disabled = false;
             break;
         default:
             confirmButton.disabled = false;
