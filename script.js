@@ -157,7 +157,7 @@ function nextStep() {
     const currentStepNumber = parseInt(currentStep.id.replace('step', ''));
     const nextStepNumber = currentStepNumber + 1;
 
-    if (nextStepNumber === 5) {
+    if (nextStepNumber === 6) { // Теперь шагов стало 6
         saveAppointment();
     } else {
         showStep(nextStepNumber);
