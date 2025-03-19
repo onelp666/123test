@@ -254,15 +254,8 @@
                 <button id="next2", class="next" disabled onclick="nextStep(3)">Подтвердить</button>
             </div>
 
-            <!-- шаг 3 -->
-            <div id="step3" class="step" style="display: none;">
-    <h2>Дополнительные услуги</h2>
-    <!-- Пока оставляем пустым -->
-    <button id="next3" class="next" onclick="nextStep(4)">Подтвердить</button>
-</div>
-
-         <!-- Шаг 4: Выбор даты и времени -->
-         <div id="step4" class="step" style="display: none;">
+         <!-- Шаг 3: Выбор даты и времени -->
+         <div id="step3" class="step" style="display: none;">
             <h2>Выберите дату и время</h2>
 
             <!-- Блок выбора даты -->
@@ -297,20 +290,20 @@
 
             <!-- Блок выбора времени -->
             <div class="time-slots"></div>
-            <button id="next4", class="next" disabled onclick="nextStep(5)">Подтвердить</button>
+            <button id="next3", class="next" disabled onclick="nextStep(4)">Подтвердить</button>
         </div>
 
-            <!-- Шаг 5: Ввод данных -->
-            <div id="step5" class="step" style="display: none;">
+            <!-- Шаг 4: Ввод данных -->
+            <div id="step4" class="step" style="display: none;">
                 <h2>Введите ваши данные</h2>
                 <input type="text" id="clientName" placeholder="ФИО" oninput="validateName(this)">
                 <input type="tel" id="clientPhone" placeholder="Номер телефона" oninput="formatPhone(this)">
                 <input type="text" id="clientCarNumber" placeholder="Номер авто">
-                <button id="next5" class="next" disabled onclick="nextStep(6)">Подтвердить</button>
+                <button id="next4", class="next" disabled onclick="nextStep(5)">Подтвердить</button>
             </div>
 
-            <!-- Шаг 6: Успешная запись -->
-            <div id="step6" class="step" style="display: none;">
+            <!-- Шаг 5: Успешная запись -->
+            <div id="step5" class="step" style="display: none;">
                 <h2>Вы успешно записались!</h2>
                 <button class="next" onclick="closeModal()">Закрыть</button>
             </div>
