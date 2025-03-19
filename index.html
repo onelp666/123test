@@ -27,62 +27,12 @@
                 Услуги детейлинг центра
             </div>
             <div class='services-grid'>
+                <!-- Пример услуги -->
                 <div class='usluga'>
                     <img src="moyka.jpg" alt="Услуга" class="usluga-image">
                     Мойка автомобиля
                 </div>
-                <div class='usluga'>
-                    <img src="antidozhd.jpg" alt="Услуга" class="usluga-image">
-                    Антидождь
-                </div>
-                <div class='usluga'>
-                    <img src="zashitpokryt.jpg" alt="Услуга" class="usluga-image">
-                    Защитные покрытия автомобиля
-                </div>
-                <div class='usluga'>
-                    <img src="poler.jpg" alt="Услуга" class="usluga-image">
-                    Полирорвка автомобиля
-                </div>
-                <div class='usluga'>
-                    <img src="usluga.jpg" alt="Услуга" class="usluga-image">
-                    Оклейка автомобиля пленкой
-                </div>
-                <div class='usluga'>
-                    <img src="toner.jpg" alt="Услуга" class="usluga-image">
-                    Тонировка автомобиля
-                </div>
-                <div class='usluga'>
-                    <img src="himka.jpg" alt="Услуга" class="usluga-image">
-                    Химчистка автомобиля
-                </div>
-                <div class='usluga'>
-                    <img src="predprodazhka.jpg" alt="Услуга" class="usluga-image">
-                    Предпродажная подготовка автомобиля
-                </div>
-                <div class='usluga'>
-                    <img src="kompluborka.jpg" alt="Услуга" class="usluga-image">
-                    Комплексная уборка салона автомобиля
-                </div>
-                <div class='usluga'>
-                    <img src="newdet.jpg" alt="Услуга" class="usluga-image">
-                    Детейлинг нового автомобиля
-                </div>
-                <div class='usluga'>
-                    <img src="motodet.jpg" alt="Услуга" class="usluga-image">
-                    Детейлинг мотоцикла
-                </div>
-                <div class='usluga'>
-                    <img src="cabr.jpg" alt="Услуга" class="usluga-image">
-                    Детейлинг кабриолета
-                </div>
-                <div class='usluga'>
-                    <img src="lob.jpg" alt="Услуга" class="usluga-image">
-                    Ремонт лобового стекла
-                </div>
-                <div class='usluga'>
-                    <img src="moykamoto.jpg" alt="Услуга" class="usluga-image">
-                    Мойка мотоцикла
-                </div>
+                <!-- Добавьте остальные услуги -->
             </div>
         </div>
 
@@ -92,227 +42,99 @@
                 Детейлинг центр в Москве
             </div>
             <div id='about' class='about'>
-                Детейлинг центр Koch24 расположен в центре Москвы, на 3-й Фрунзенской улице, д. 19 (м. Спортивная) — профессиональное обслуживание автомобилей и мотоциклов. Предлагаем широкий спектр услуг детейлинга премиум уровня: от KCX-мойки до оклейки антигравийной плёнкой. Профессиональное оборудование и премиальная автохимия Koch Chemie — идеально для лучшего детейлинга в Москве!
-                <div class="spacer"></div>
-                Услуги детейлинга автомобиля:
-                <div class="spacer"></div>
-                <div id="gradient-overlay" class="gradient-overlay"></div>
+                Описание компании...
             </div>
         </div>
 
-        <!-- Кнопка "Читать полностью" -->
-        <div id='text1' class='text1'>
-            <div id='link' class='link' onclick="toggleReadMore()">
-                <div id='readfull' class='readfull'>Читать полностью</div>
-                <div id='more2.svg' class='more2.svg'>
-                    <div id='more2.svgfill' class='more2.svgfill'>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width="10" height="10">
-                            <path d="M0 3 L5 8 L10 3" stroke="black" stroke-width="1" fill="none"/>
-                        </svg>
+        <!-- Кнопка "Записаться сейчас" -->
+        <div id="fixed-button" class="fixed-button">
+            Записаться сейчас
+        </div>
+
+        <!-- Модальное окно -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <!-- Крестик для закрытия модального окна -->
+                <div class="close-modal" onclick="closeModal()">×</div>
+                <!-- Кнопка "Назад" -->
+                <div class="back-button" onclick="prevStep()">←</div>
+
+                <!-- Шаг 1: Выбор марки и модели -->
+                <div id="step1" class="step">
+                    <h2>Выберите марку и модель автомобиля</h2>
+                    <select id="brand" onchange="populateModels()">
+                        <option value="">Выберите марку</option>
+                    </select>
+                    <select id="model" disabled>
+                        <option value="">Выберите модель</option>
+                    </select>
+                    <button id="next1" class="next" disabled onclick="nextStep()">Подтвердить</button>
+                </div>
+
+                <!-- Шаг 2: Выбор услуг -->
+                <div id="step2" class="step" style="display: none;">
+                    <h2>Выбор услуг</h2>
+                    <div id="services-container"></div>
+                    <p>Подытог: <span id="total">0₽</span></p>
+                    <button id="next2" class="next" disabled onclick="nextStep()">Подтвердить</button>
+                </div>
+
+                <!-- Шаг 3: Дополнительные услуги -->
+                <div id="step3" class="step" style="display: none;">
+                    <h2>Дополнительные услуги</h2>
+                    <p>Здесь будут дополнительные услуги.</p>
+                    <button id="next3" class="next" onclick="nextStep()">Подтвердить</button>
+                </div>
+
+                <!-- Шаг 4: Выбор даты и времени -->
+                <div id="step4" class="step" style="display: none;">
+                    <h2>Выберите дату и время</h2>
+                    <div id="date-picker">
+                        <div id="selected-date">
+                            <button id="prev-day" class="change" onclick="changeDay(-1)">‹</button>
+                            <div id="date-display" onclick="toggleCalendar()">
+                                <span id="current-date">Сегодня</span>
+                                <span id="current-day"></span>
+                            </div>
+                            <button id="next-day" class="change" onclick="changeDay(1)">›</button>
+                        </div>
+                        <div id="calendar" style="display: none;">
+                            <div class="calendar-header">
+                                <button class="change-month-left" onclick="changeMonth(-1)">‹</button>
+                                <span id="current-month"></span>
+                                <button class="change-month-right" onclick="changeMonth(1)">›</button>
+                                <button id="close-calender" onclick="toggleCalendar()">×</button>
+                            </div>
+                            <div class="calendar-days">
+                                <div>Пн</div>
+                                <div>Вт</div>
+                                <div>Ср</div>
+                                <div>Чт</div>
+                                <div>Пт</div>
+                                <div>Сб</div>
+                                <div>Вс</div>
+                            </div>
+                            <div id="calendar-grid"></div>
+                        </div>
                     </div>
+                    <div class="time-slots"></div>
+                    <button id="next4" class="next" disabled onclick="nextStep()">Подтвердить</button>
                 </div>
-            </div>
-        </div>
 
-        <!-- Скрытый текст -->
-        <div id='hidden-text' class='hidden-text'>
-            Детейлинг экстерьера:  KCX-мойка автомобиля, мойка двигателя, полировка кузова автомобиля, полировка фар, очистка дисков, антидождь, нанесение керамического покрытия, оклейка автомобиля антигравийной пленкой, бронирование лобового стекла, тонировка стекол и оптики, удаление битума с кузова автомобиля, очистка элементов кузова, чернение шин.
-            <div class="spacer"></div>
-            Детейлинг интерьера: химчистка салона автомобиля из кожи, ткани, алькантары, велюра, химчистка потолка, сидений, комплексная уборка салона автомобиля, устранение сторонних запахов, консервация всех поверхностей салона автомобиля, уход за кожаным салоном.
-            <div class="spacer"></div>
-            Наши преимущества:
-            Используем только профессиональные средства Koch Chemie и плёнки премиум класса.
-            Мастера по детейлингу и оклейке автомобиля имеют огромный опыт работы.
-            С 2009 года мы занимаем лидирующую позицию в сфере профессионального детейлинга премиум класса в Москве.
-            Предоставляем гарантии на все выполненные работы.
-            <div class="spacer"></div>
-            В своей работе мы используем точность, профессиональное качество и усердие, а также накопленный годами опыт. Наша цель – не просто оказать услугу, а превзойти ожидания клиента. В нашем портфолио большое количество работ по уходу автомобилями класса люкс, премиум и бизнес.
-            <div class="spacer"></div>
-            Мы гарантируем, что услуги, оказанные в нашем детейлинг центре сохранят эксплуатационные характеристики и внешний вид автомобиля в течении длительного времени.
-            <div class="spacer"></div>
-            Детейлинг (detailing) – это детальный подход к каждой детали, невероятно бережное отношение к автомобилю и применение высоких технологий. Детейлинг – это искусство, которое стало нашим призванием и неотъемлемой частью нашей жизни.    
-        </div>
-
-        <!-- Кнопка "Скрыть" -->
-        <div id='hide-button' class='text1' style="display: none;">
-            <div id='link' class='link' onclick="toggleReadMore()">
-                <div id='readfull' class='readfull'>Скрыть</div>
-                <div id='more2.svg' class='more2.svg'>
-                    <div id='more2.svgfill' class='more2.svgfill'>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width="10" height="10" style="transform: rotate(180deg);">
-                            <path d="M0 3 L5 8 L10 3" stroke="black" stroke-width="1" fill="none"/>
-                        </svg>
-                    </div>
+                <!-- Шаг 5: Ввод данных -->
+                <div id="step5" class="step" style="display: none;">
+                    <h2>Введите ваши данные</h2>
+                    <input type="text" id="clientName" placeholder="ФИО" oninput="validateName(this)">
+                    <input type="tel" id="clientPhone" placeholder="Номер телефона" oninput="formatPhone(this)">
+                    <input type="text" id="clientCarNumber" placeholder="Номер авто">
+                    <button id="next5" class="next" disabled onclick="nextStep()">Подтвердить</button>
                 </div>
-            </div>
-        </div>
 
-        <!-- Примеры работ -->
-        <div id='primeri' class='primeri'>
-            <div id='heading2→примерыработ' class='heading2→примерыработ'>
-                Примеры работ
-            </div>
-            <div id='primer1' class='primer1'>
-                <img src="gelik.jpg" alt="Gelik" class="primer-image">
-                <div id='rectangle13' class='rectangle13'>
-                    <div id='heading5→оклейкаавтомобиляплёнкой3' class='heading5→оклейкаавтомобиляплёнкой3'>
-                        Комплекс работ для Mercedes AMG G63
-                    </div>
+                <!-- Шаг 6: Успешная запись -->
+                <div id="step6" class="step" style="display: none;">
+                    <h2>Вы успешно записались!</h2>
+                    <button class="next" onclick="closeModal()">Закрыть</button>
                 </div>
-            </div>
-            <div id='primer2' class='primer2'>
-                <img src="lin.jpg" alt="Lin" class="primer-image">
-                <div id='rectangle12' class='rectangle12'>
-                    <div id='heading5→оклейкаавтомобиляплёнкой2' class='heading5→оклейкаавтомобиляплёнкой2'>
-                        Оклейка автомобиля Li 9 виниловой плёнкой KPMF
-                    </div>
-                </div>
-            </div>
-            <div id='primer3' class='primer3'>
-                <img src="mka.jpg" alt="MKA" class="primer-image">
-                <div id='rectangle1' class='rectangle1'>
-                    <div id='heading5→оклейкаавтомобиляплёнкой' class='heading5→оклейкаавтомобиляплёнкой'>
-                        Оклейка автомобиля BMW M4 Cabrio антигравийной плёнкой LLumar PPF Matte
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Раздел "О нас" -->
-        <div id='about-section' class='about-section'>
-            <div id='heading2→контакты' class='heading2→контакты'>
-                <img src="logoblack.svg" alt="Логотип Koch24" class="logo-black">
-            </div>
-            <div id='address' class='address'>
-                г. Москва, ул. 3-я Фрунзенская, д. 19 (м. Спортивная) 
-                <br><br>
-            </div>
-            <div id='email' class='email'>
-                koch24@list.ru 
-                <br><br>
-            </div>
-            <div id='rating' class='rating'>
-                <strong>5,0</strong> Рейтинг организации в Яндексе
-                <br><br>
-            </div>
-            <!-- Виджет рейтинга Яндекс.Карт -->
-            <a class="RatingBadgeWidget" target="_blank" href="//yandex.ru/maps/org/1349640743/reviews?utm_source=badge&amp;utm_medium=rating&amp;utm_campaign=v1" style="background-image:url(https://avatars.mds.yandex.net/get-altay/774406/badge_rating_dark_5.0/orig)"></a>
-
-            <!-- Ссылки на Instagram и Telegram -->
-            <div class="social-links">
-                <a href="https://www.instagram.com/koch24_service/" target="_blank">
-                    <img src="inst.svg" alt="Instagram" class="social-icon">
-                </a>
-                <a href="https://t.me/obyasnitelnaya23" target="_blank">
-                    <img src="tg.svg" alt="Telegram" class="social-icon">
-                </a>
-            </div>
-        </div>
-
-        <!-- Футер -->
-        <div id='footer' class='footer'>
-            <div class="footer-left">
-                © 2009-2025 - Детейлинг центр в Москве | Koch24
-            </div>
-            <div class="footer-right">
-                <a href="https://koch24.ru/policy/">Политика безопасности</a>
-            </div>
-        </div>
-    </div>
-    
-     <!-- Кнопка "Записаться сейчас" -->
-    <div id="fixed-button" class="fixed-button">
-        Записаться сейчас
-    </div>
-
-    <!-- Модальное окно -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <!-- Крестик для закрытия модального окна -->
-            <div class="close-modal" onclick="closeModal()">×</div>
-
-            <!-- Кнопка "Назад" -->
-            <div class="back-button" onclick="prevStep()">←</div>
-
-            <!-- Шаг 1: Выбор марки и модели -->
-            <div id="step1" class="step">
-                <h2>Выберите марку и модель автомобиля</h2>
-                <select id="brand" onchange="populateModels()">
-                    <option value="">Выберите марку</option>
-                </select>
-                <select id="model" disabled>
-                    <option value="">Выберите модель</option>
-                </select>
-                <button id="next1", class="next" disabled onclick="nextStep(2)">Подтвердить</button>
-            </div>
-
-            <!-- Шаг 2: Выбор услуг -->
-            <div id="step2" class="step" style="display: none;">
-                <h2>Выбор услуг</h2>
-                <div id="services-container"></div>
-                <p>Подытог: <span id="total">0₽</span></p>
-                <button id="next2", class="next" disabled onclick="nextStep(3)">Подтвердить</button>
-            </div>
-
-            <!-- Шаг 3: допы -->
-            <div id="step3" class="step" style="display: none;">
-    <h2>Дополнительные услуги</h2>
-    <p>Здесь будут дополнительные услуги.</p>
-    <button id="next3" class="next" onclick="nextStep(4)">Подтвердить</button>
-</div>
-
-         <!-- Шаг 4: Выбор даты и времени -->
-         <div id="step4" class="step" style="display: none;">
-            <h2>Выберите дату и время</h2>
-
-            <!-- Блок выбора даты -->
-        <div id="date-picker">
-           <div id="selected-date">
-                <button id="prev-day" class="change" onclick="changeDay(-1)">‹</button>
-                <div id="date-display" onclick="toggleCalendar()">
-                    <span id="current-date">Сегодня</span>
-                    <span id="current-day"></span>
-                </div>
-                <button id="next-day" class="change" onclick="changeDay(1)">›</button>
-            </div>
-            <div id="calendar" style="display: none;">
-                <div class="calendar-header">
-                    <button class="change-month-left" onclick="changeMonth(-1)">‹</button>
-                    <span id="current-month"></span>
-                    <button class="change-month-right" onclick="changeMonth(1)">›</button>
-                    <button id="close-calender" onclick="toggleCalendar()">×</button>
-                </div>
-                <div class="calendar-days">
-                    <div>Пн</div>
-                    <div>Вт</div>
-                    <div>Ср</div>
-                    <div>Чт</div>
-                    <div>Пт</div>
-                    <div>Сб</div>
-                    <div>Вс</div>
-                </div>
-                <div id="calendar-grid"></div>
-            </div>
-        </div>
-
-            <!-- Блок выбора времени -->
-            <div class="time-slots"></div>
-            <button id="next4", class="next" disabled onclick="nextStep(5)">Подтвердить</button>
-        </div>
-
-            <!-- Шаг 5: Ввод данных -->
-            <div id="step5" class="step" style="display: none;">
-                <h2>Введите ваши данные</h2>
-                <input type="text" id="clientName" placeholder="ФИО" oninput="validateName(this)">
-                <input type="tel" id="clientPhone" placeholder="Номер телефона" oninput="formatPhone(this)">
-                <input type="text" id="clientCarNumber" placeholder="Номер авто">
-                <button id="next5", class="next" disabled onclick="nextStep(6)">Подтвердить</button>
-            </div>
-
-            <!-- Шаг 6: Успешная запись -->
-            <div id="step6" class="step" style="display: none;">
-                <h2>Вы успешно записались!</h2>
-                <button class="next" onclick="closeModal()">Закрыть</button>
             </div>
         </div>
     </div>
