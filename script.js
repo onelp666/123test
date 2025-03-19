@@ -128,12 +128,15 @@ function showStep(step) {
     const closeButton = document.querySelector('.close-modal');
 
     if (step === 1) {
+        // На первом шаге скрываем кнопку "Назад" и показываем кнопку "Закрыть"
         backButton.style.display = 'none';
         closeButton.style.display = 'block';
     } else if (step === 5) {
+        // На последнем шаге (успешная запись) скрываем обе кнопки
         backButton.style.display = 'none';
         closeButton.style.display = 'none';
     } else {
+        // На всех остальных шагах показываем обе кнопки
         backButton.style.display = 'block';
         closeButton.style.display = 'block';
     }
@@ -141,6 +144,7 @@ function showStep(step) {
     updateConfirmButton();
 
     if (step === 4) {
+        // Логика для шага ввода личной информации
         validateStep4();
         setupStep4Listeners();
     }
@@ -480,7 +484,8 @@ function validateStep4() {
     const name = nameInput.value.trim();
     const phone = phoneInput.value.trim();
     const carNumber = carNumberInput.value.trim();
-    const isPhoneValid = phone.length === 18;
+
+    const isPhoneValid = phone.length === 18; // Проверка формата телефона
 
     nextButton.disabled = !(name && isPhoneValid && carNumber);
 }
@@ -504,24 +509,31 @@ function updateConfirmButton() {
 
     switch (stepNumber) {
         case 1:
+            // Шаг 1: Выбор марки и модели
             const brandSelected = document.getElementById('brand').value;
             const modelSelected = document.getElementById('model').value;
             confirmButton.disabled = !(brandSelected && modelSelected);
             break;
         case 2:
+            // Шаг 2: Выбор услуг
             const servicesSelected = document.querySelectorAll('input[name="service"]:checked').length > 0;
             confirmButton.disabled = !servicesSelected;
             break;
         case 3:
-            // Шаг "Дополнительные услуги" всегда активен
+            // Шаг 3: Дополнительные услуги (всегда активен)
             confirmButton.disabled = false;
             break;
         case 4:
-            const timeSlotSelected = document.querySelector('.time-slot.selected');
-            confirmButton.disabled = !(timeSlotSelected && selectedDate);
+            // Шаг 4: Ввод личной информации
+            const nameInput = document.getElementById('clientName').value.trim();
+            const phoneInput = document.getElementById('clientPhone').value.trim();
+            const carNumberInput = document.getElementById('clientCarNumber').value.trim();
+            const isPhoneValid = phoneInput.length === 18; // Проверка формата телефона
+            confirmButton.disabled = !(nameInput && isPhoneValid && carNumberInput);
             break;
         case 5:
-            validateStep4();
+            // Шаг 5: Успешная запись (кнопка "Закрыть")
+            confirmButton.disabled = false;
             break;
         default:
             confirmButton.disabled = false;
