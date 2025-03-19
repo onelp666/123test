@@ -121,7 +121,6 @@ function showStep(step) {
     document.querySelectorAll('.step').forEach(function (stepElement) {
         stepElement.style.display = 'none';
     });
-
     document.getElementById(`step${step}`).style.display = 'flex';
 
     const backButton = document.querySelector('.back-button');
@@ -130,7 +129,7 @@ function showStep(step) {
     if (step === 1) {
         backButton.style.display = 'none';
         closeButton.style.display = 'block';
-    } else if (step === 6) { // Теперь шагов стало 6
+    } else if (step === 5) {
         backButton.style.display = 'none';
         closeButton.style.display = 'none';
     } else {
@@ -140,12 +139,12 @@ function showStep(step) {
 
     updateConfirmButton();
 
-    if (step === 5) { // Теперь шаг 5 — это ввод данных
+    if (step === 4) {
         validateStep4();
         setupStep4Listeners();
     }
 
-    if (step === 4) { // Теперь шаг 4 — это выбор даты и времени
+    if (step === 3) {
         updateDateDisplay();
         renderCalendar(selectedDate);
     }
@@ -158,7 +157,7 @@ function nextStep() {
     const currentStepNumber = parseInt(currentStep.id.replace('step', ''));
     const nextStepNumber = currentStepNumber + 1;
 
-    if (nextStepNumber === 6) { // Теперь шагов стало 6
+    if (nextStepNumber === 5) {
         saveAppointment();
     } else {
         showStep(nextStepNumber);
@@ -190,6 +189,7 @@ function resetModal() {
     updateDateDisplay(); // Обновляем отображение даты
     renderCalendar(selectedDate); // Перерисовываем календарь
 
+
     const timeSlotsContainer = document.querySelector('.time-slots');
     timeSlotsContainer.innerHTML = '';
 
@@ -199,9 +199,8 @@ function resetModal() {
 
     document.getElementById('next1').disabled = true;
     document.getElementById('next2').disabled = true;
-    document.getElementById('next3').disabled = true; // Новый шаг
-    document.getElementById('next4').disabled = true; // Теперь это шаг 4
-    document.getElementById('next5').disabled = true; // Теперь это шаг 5
+    document.getElementById('next3').disabled = true;
+    document.getElementById('next4').disabled = true;
 
     showStep(1);
 }
@@ -476,7 +475,7 @@ function validateStep4() {
     const nameInput = document.getElementById('clientName');
     const phoneInput = document.getElementById('clientPhone');
     const carNumberInput = document.getElementById('clientCarNumber');
-    const nextButton = document.getElementById('next5');
+    const nextButton = document.getElementById('next4');
 
     const name = nameInput.value.trim();
     const phone = phoneInput.value.trim();
@@ -514,15 +513,11 @@ function updateConfirmButton() {
             confirmButton.disabled = !servicesSelected;
             break;
         case 3:
-            // Новый шаг "Дополнительные услуги"
-            confirmButton.disabled = false; // Кнопка всегда активна на этом шаге
-            break;
-        case 4:
             const timeSlotSelected = document.querySelector('.time-slot.selected');
             confirmButton.disabled = !(timeSlotSelected && selectedDate);
             break;
-        case 5:
-            validateStep4(); // Теперь это шаг 5
+        case 4:
+            validateStep4();
             break;
         default:
             confirmButton.disabled = false;
