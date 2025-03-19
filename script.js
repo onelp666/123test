@@ -513,10 +513,14 @@ function updateConfirmButton() {
             confirmButton.disabled = !servicesSelected;
             break;
         case 3:
+            // Новый шаг "Дополнительные услуги"
+            confirmButton.disabled = false; // Пока оставляем кнопку активной
+            break;
+        case 4:
             const timeSlotSelected = document.querySelector('.time-slot.selected');
             confirmButton.disabled = !(timeSlotSelected && selectedDate);
             break;
-        case 4:
+        case 5:
             validateStep4();
             break;
         default:
