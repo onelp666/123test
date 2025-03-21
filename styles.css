@@ -768,32 +768,3 @@ input[type="tel"]:focus {
     background-color: #f5f5f5;
     border-radius: 5px;
 }
-
-/* Стили для дополнительных услуг (аналогичны основным услугам) */
-.service-container {
-    margin-bottom: 10px;
-}
-
-.service-description {
-    font-size: 12px;
-    color: #56595a;
-    margin-top: 5px;
-    padding: 10px;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    display: none;
-}
-
-.question-icon {
-    cursor: pointer;
-    margin-left: 10px;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #000;
-    color: #fff;
-    text-align: center;
-    line-height: 20px;
-    font-size: 14px;
-}
