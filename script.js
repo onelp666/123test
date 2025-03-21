@@ -162,11 +162,17 @@ function nextStep() {
     const currentStepNumber = parseInt(currentStep.id.replace('step', ''));
     const nextStepNumber = currentStepNumber + 1;
 
-    if (nextStepNumber === 6) {
-        saveAppointment();
-    } else {
-        showStep(nextStepNumber);
+    if (nextStepNumber === 3) {
+        // Загружаем дополнительные услуги
+        const modelId = document.getElementById('model').value;
+        if (modelId) {
+            dbFunctions.getServices(db, modelId).then(services => {
+                populateAdditionalServices(services);
+            });
+        }
     }
+
+    showStep(nextStepNumber);
 }
 
 function prevStep() {
@@ -359,6 +365,113 @@ function populateServices(services) {
     });
 
     // Закрываем описание при клике вне области
+    document.addEventListener('click', (event) => {
+        const descriptions = document.querySelectorAll('.service-description');
+        descriptions.forEach(desc => {
+            if (!desc.contains(event.target) && !desc.previousElementSibling.contains(event.target)) {
+                desc.style.display = 'none';
+            }
+        });
+    });
+}
+
+// Функция для отображения дополнительных услуг
+function populateAdditionalServices(services) {
+    const servicesContainer = document.getElementById('additional-services-container');
+    servicesContainer.innerHTML = '';
+
+    if (!services || !Array.isArray(services)) {
+        console.error("Ошибка: services не определен или не является массивом");
+        return;
+    }
+
+    if (services.length === 0) {
+        console.warn("Нет доступных дополнительных услуг для выбранной модели");
+        servicesContainer.innerHTML = '<p>Дополнительные услуги для данного авто пока что добавляются, скоро все исправим)</p>';
+        return;
+    }
+
+    services.forEach(service => {
+        const serviceContainer = document.createElement('div');
+        serviceContainer.className = 'service-container';
+        serviceContainer.style.marginBottom = '10px';
+
+        const label = document.createElement('label');
+        label.innerHTML = `
+            <input type="checkbox" name="additional-service" value="${service.id}" data-price="${service.price}" data-duration="${service.duration}" onchange="updateTotal()">
+            ${service.name} (${service.price}₽, ${service.duration} мин)
+        `;
+
+        const questionIcon = document.createElement('div');
+        questionIcon.className = 'question-icon';
+        questionIcon.innerHTML = '?';
+        questionIcon.style.cursor = 'pointer';
+        questionIcon.style.marginLeft = '10px';
+        questionIcon.style.display = 'inline-block';
+        questionIcon.style.width = '20px';
+        questionIcon.style.height = '20px';
+        questionIcon.style.borderRadius = '50%';
+        questionIcon.style.backgroundColor = '#000';
+        questionIcon.style.color = '#fff';
+        questionIcon.style.textAlign = 'center';
+        questionIcon.style.lineHeight = '20px';
+        questionIcon.style.fontSize = '14px';
+
+        const description = document.createElement('div');
+        description.className = 'service-description';
+        description.style.display = 'none';
+        description.style.fontSize = '12px';
+        description.style.color = '#56595a';
+        description.style.marginTop = '5px';
+        description.style.padding = '10px';
+        description.style.backgroundColor = '#f5f5f5';
+        description.style.borderRadius = '5px';
+
+        // Описание для каждой услуги
+        if (service.name === 'Мойка колёс комплекс') {
+            description.innerHTML = `
+                <strong>Мойка колёс комплекс</strong><br>
+                Мойка дисков, шин, удаление битума, накипи от колодок, стоимость указана за 4 колеса.
+            `;
+        } else if (service.name === 'Комплексная очистка кузова автомобиля') {
+            description.innerHTML = `
+                <strong>Комплексная очистка кузова автомобиля</strong><br>
+                Мойка кузова, очистка лакокрасочного покрытия, стекла, пластик, декоративные элементы.
+            `;
+        } else if (service.name === 'Удаление битума с кузова автомобиля') {
+            description.innerHTML = `
+                <strong>Удаление битума с кузова автомобиля</strong><br>
+                Спец состав TEERWASCHE. 1 деталь.
+            `;
+        } else if (service.name === 'Очистка элементов кузова') {
+            description.innerHTML = `
+                <strong>Очистка элементов кузова</strong><br>
+                Смола от деревьев, птичий помет, известковые пятна. 1 деталь.
+            `;
+        } else if (service.name === 'Чернение шин защитным составом') {
+            description.innerHTML = `
+                <strong>Чернение шин защитным составом</strong><br>
+                GUMMI, KUNSTSTOFF освежитель для резиновых поверхностей, сохраняет ухоженный вид на длительный период времени.
+            `;
+        } else if (service.name === 'Обработка наружного пластика и резинок') {
+            description.innerHTML = `
+                <strong>Обработка наружного пластика и резинок</strong><br>
+                Зимой и в момент сильных осадков рекомендуем обрабатывать составом с силиконом Plast Star - средство по уходу за наружным пластиком и резиновыми изделиями.
+            `;
+        }
+
+        questionIcon.addEventListener('click', (event) => {
+            event.stopPropagation();
+            description.style.display = description.style.display === 'none' ? 'block' : 'none';
+        });
+
+        serviceContainer.appendChild(label);
+        serviceContainer.appendChild(questionIcon);
+        serviceContainer.appendChild(description);
+
+        servicesContainer.appendChild(serviceContainer);
+    });
+
     document.addEventListener('click', (event) => {
         const descriptions = document.querySelectorAll('.service-description');
         descriptions.forEach(desc => {
